@@ -13,7 +13,7 @@ class MovieListView(views.APIView):
 
 
 class MovieDetailView(views.APIView):
-    def get(self, request):
-        queryset = Movie.objects.all()
-        serializer = MovieDetailSerializer(queryset, many=True)
+    def get(self, request, pk):
+        queryset = Movie.objects.filter(id=pk, draft=False)
+        serializer = MovieDetailSerializer(queryset)
         return Response(serializer.data)
